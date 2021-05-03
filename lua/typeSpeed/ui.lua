@@ -1,6 +1,9 @@
 local popup = require('popup')
 
-local M{}
+local M = {}
+
+TypeSpeedId = nil
+TypeSpeedBufh = nil
 
 local function create_window()
     local width = 60
@@ -23,5 +26,5 @@ local function create_window()
         bufnr = bufnr,
         win_id = typeSpeedId
     }
-
 end
+
