@@ -50,3 +50,4 @@ local function wordDisplay()
     vim.cmd(string.format("autocmd BufModifiedSet <buffer=%s> set nomodified", TypeSpeedBufh))
 
 end
+return wordDisplay
