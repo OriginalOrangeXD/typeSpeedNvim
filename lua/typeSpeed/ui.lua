@@ -28,3 +28,25 @@ local function create_window()
     }
 end
 
+local function wordDisplay()
+    if TypeSpeedId ~= nil and vim.api.nvim_win_is_valid(TypeSpeedId) then
+        vim.api.nvim_win_close(TypeSpeedId, true)
+        TypeSpeedId = nil
+        TypeSpeedBufh = nil
+    end
+    local winInfo = create_window()
+    local content = {}
+
+    TypeSpeedId = winInfo.win_id
+    TypeSpeedBufh = winInfo.bufnr
+
+    content[0] = "test"
+    content[1] = "test2"
+    vim.api.nvim_buf_set_name(TypeSpeedBufh, "Typeing Speed")
+    vim.api.nvim_buf_set_lines(TypeSpeedBufh, 0, #content, false, content)
+    vim.api.nvim_buf_set_option(TypeSpeedBufh, "filetype", "typeSpeed")
+    vim.api.nvim_buf_set_option(TypeSpeedBufh, "buftype", "acwrite")
+    vim.api.nvim_buf_set_option(TypeSpeedBufh, "bufhidden", "delete")
+    vim.cmd(string.format("autocmd BufModifiedSet <buffer=%s> set nomodified", TypeSpeedBufh))
+
+end
