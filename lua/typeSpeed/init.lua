@@ -1,7 +1,7 @@
 local display = require('typeSpeed.ui')
-local greet = require('typeSpeed.module')
 
 return
 {
-    display = display
+    words = words,
+    display = display({"Word1", "Word2", "Word3", "Word4"})
 }

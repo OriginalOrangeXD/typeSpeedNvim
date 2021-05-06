@@ -1,4 +1,5 @@
 local popup = require('popup')
+local words = require('getWord')
 
 local M = {}
 
@@ -12,8 +13,8 @@ local function create_window()
     local bufnr = vim.api.nvim_create_buf(false, false)
 
     local typeSpeedId, win = popup.create(bufnr, {
-        title = 'Harpoon',
-        highlight = 'HarpoonWindow',
+        title = 'TypeSpeed',
+        highlight = 'TypeSpeedWindow',
         line = math.floor(((vim.o.lines - height) / 2) - 1),
         col = math.floor((vim.o.columns - width) / 2),
         minwidth = width,
@@ -28,7 +29,7 @@ local function create_window()
     }
 end
 
-local function wordDisplay()
+local function wordDisplay(wordList)
     if TypeSpeedId ~= nil and vim.api.nvim_win_is_valid(TypeSpeedId) then
         vim.api.nvim_win_close(TypeSpeedId, true)
         TypeSpeedId = nil
@@ -40,14 +41,20 @@ local function wordDisplay()
     TypeSpeedId = winInfo.win_id
     TypeSpeedBufh = winInfo.bufnr
 
-    content[0] = "test"
-    content[1] = "test2"
+
+    content[1] = string.format("test")
+    content[2] = string.format("test2")
+    content[3] = string.format('')
+    for k,v in pairs(wordList) do
+        content[3] = content[3] .. string.format("%s ",v)
+    end
     vim.api.nvim_buf_set_name(TypeSpeedBufh, "Typeing Speed")
     vim.api.nvim_buf_set_lines(TypeSpeedBufh, 0, #content, false, content)
     vim.api.nvim_buf_set_option(TypeSpeedBufh, "filetype", "typeSpeed")
     vim.api.nvim_buf_set_option(TypeSpeedBufh, "buftype", "acwrite")
     vim.api.nvim_buf_set_option(TypeSpeedBufh, "bufhidden", "delete")
     vim.cmd(string.format("autocmd BufModifiedSet <buffer=%s> set nomodified", TypeSpeedBufh))
+    content = nil
 
 end
 return wordDisplay
