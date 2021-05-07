@@ -4,7 +4,7 @@ local function file_exists(file)
     return f ~= nil
 end
 
-function LinesGet(file)
+local function linesGet(file)
     if not file_exists(file) then return {} end
     local lines = {}
     for line in io.lines(file) do
@@ -12,4 +12,19 @@ function LinesGet(file)
     end
     return lines
 end
-return LinesGet
+
+function TenWord(file)
+    local lines = linesGet(file)
+    math.randomseed(os.time())
+
+    local words = {}
+
+    for i=0, 10,1 do
+        local tmp = math.random(#lines)
+        words[i] = lines[tmp]
+    end
+    return words
+end
+
+return TenWord
+

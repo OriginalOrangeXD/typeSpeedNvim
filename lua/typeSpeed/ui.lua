@@ -42,11 +42,8 @@ local function wordDisplay(wordList)
     TypeSpeedBufh = winInfo.bufnr
 
 
-    content[1] = string.format("test")
-    content[2] = string.format("test2")
-    content[3] = string.format('')
     for k,v in pairs(wordList) do
-        content[3] = content[3] .. string.format("%s ",v)
+        content[1] = content[1] .. string.format("%s ",v)
     end
     vim.api.nvim_buf_set_name(TypeSpeedBufh, "Typeing Speed")
     vim.api.nvim_buf_set_lines(TypeSpeedBufh, 0, #content, false, content)
