@@ -41,6 +41,7 @@ local function wordDisplay(wordList)
     TypeSpeedId = winInfo.win_id
     TypeSpeedBufh = winInfo.bufnr
 
+    content[1] = ''
 
     for k,v in pairs(wordList) do
         content[1] = content[1] .. string.format("%s ",v)
